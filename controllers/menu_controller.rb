@@ -1,20 +1,18 @@
 require_relative '../models/address_book'
 
 class MenuController
-  attr_reader :address_book
-
+  attr_accessor :address_book
   def initialize
     @address_book = AddressBook.new
   end
 
   def main_menu
-# #2
-    puts "Main Menu - #{address_book.entries.count} entries"
+    puts "Main Menu - #{@address_book.entries.count} entries"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - View Entry Number n"
+    puts "5 - Delete all entries"
     puts "6 - Exit"
     print "Enter your selection: "
 
@@ -40,13 +38,12 @@ class MenuController
            main_menu
          when 5
            system "clear"
-           entry_n_submenu
+           @address_book.demolish
+           puts "All entries have been removed."
            main_menu
          when 6
            puts "Good-bye!"
-     # #8
            exit(0)
-     # #9
          else
            system "clear"
            puts "Sorry, that is not a valid input"
@@ -211,3 +208,4 @@ class MenuController
         entry_submenu(entry)
      end
    end
+ end

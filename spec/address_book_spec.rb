@@ -40,6 +40,17 @@ RSpec.describe AddressBook do
     end
   end
 
+  describe "#demolish" do
+    it "should delete all entries" do
+      book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+      book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+      book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+
+      book.demolish
+      expect(book.entries.size).to eq 0
+    end
+  end
+
   describe "#binary_search" do
       it "searches AddressBook for a non-existent entry" do
         book.import_from_csv("entries.csv")
@@ -81,7 +92,7 @@ RSpec.describe AddressBook do
        expect(entry).to be_a Entry
        check_entry(entry, "Sussie", "555-555-2036", "sussie@blocmail.com")
      end
-     
+
      it "searches AddressBook for Billy" do
        book.import_from_csv("entries.csv")
        entry = book.binary_search("Billy")
